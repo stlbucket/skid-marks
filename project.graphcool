@@ -1,0 +1,68 @@
+# project: cj2h1pdcmiay30107nlgjzxyh
+# version: 7
+
+type File implements Node {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  name: String!
+  secret: String! @isUnique
+  size: Int!
+  skidMark: SkidMark! @relation(name: "SkidMarkFiles")
+  updatedAt: DateTime!
+  url: String! @isUnique
+}
+
+type GeoPoint implements Node {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  lat: Float!
+  lng: Float!
+  location: Location @relation(name: "LocationGeoPoint")
+  updatedAt: DateTime!
+}
+
+type Location implements Node {
+  createdAt: DateTime!
+  geoPoint: GeoPoint @relation(name: "LocationGeoPoint")
+  id: ID! @isUnique
+  name: String!
+  skateHole: SkidMark @relation(name: "SkidMarkLocation")
+  updatedAt: DateTime!
+}
+
+type Review implements Node {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  ratingLevel: RatingLevel!
+  skidMark: SkidMark! @relation(name: "SkidMarkReviews")
+  updatedAt: DateTime!
+  user: User! @relation(name: "UserReviews")
+}
+
+type SkidMark implements Node {
+  createdAt: DateTime!
+  createdByUser: User! @relation(name: "UserSkidMarks")
+  files: [File!]! @relation(name: "SkidMarkFiles")
+  id: ID! @isUnique
+  location: Location @relation(name: "SkidMarkLocation")
+  name: String!
+  reviews: [Review!]! @relation(name: "SkidMarkReviews")
+  updatedAt: DateTime!
+}
+
+type User implements Node {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  reviews: [Review!]! @relation(name: "UserReviews")
+  skidMarks: [SkidMark!]! @relation(name: "UserSkidMarks")
+  updatedAt: DateTime!
+}
+
+enum RatingLevel {
+  Shit
+  Crap
+  Rad
+  Bitchin
+  SkateOrDie
+}
