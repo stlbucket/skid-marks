@@ -1,5 +1,5 @@
 # project: cj2h1pdcmiay30107nlgjzxyh
-# version: 8
+# version: 11
 
 type File implements Node {
   contentType: String!
@@ -48,9 +48,9 @@ type Review implements Node {
 
 type SkidMark implements Node {
   createdAt: DateTime!
-  createdByUser: User! @relation(name: "UserSkidMarks")
   description: String
   files: [File!]! @relation(name: "SkidMarkFiles")
+  foundByUser: User! @relation(name: "UserSkidMarks")
   id: ID! @isUnique
   location: Location @relation(name: "SkidMarkLocation")
   name: String!
@@ -60,7 +60,9 @@ type SkidMark implements Node {
 
 type User implements Node {
   createdAt: DateTime!
+  email: String @isUnique
   id: ID! @isUnique
+  password: String
   reviews: [Review!]! @relation(name: "UserReviews")
   skidMarks: [SkidMark!]! @relation(name: "UserSkidMarks")
   updatedAt: DateTime!

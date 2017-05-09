@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "command-line-args": "^4.0.4",
+    "cool-entity": "^1.0.12",
+    "fbkt-clog": "^1.0.5"
+  }
 }
