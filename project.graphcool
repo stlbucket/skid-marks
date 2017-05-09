@@ -1,5 +1,5 @@
 # project: cj2h1pdcmiay30107nlgjzxyh
-# version: 7
+# version: 8
 
 type File implements Node {
   contentType: String!
@@ -23,12 +23,17 @@ type GeoPoint implements Node {
 }
 
 type Location implements Node {
+  address: String
+  city: String
   createdAt: DateTime!
+  description: String
   geoPoint: GeoPoint @relation(name: "LocationGeoPoint")
   id: ID! @isUnique
   name: String!
   skateHole: SkidMark @relation(name: "SkidMarkLocation")
+  state: String
   updatedAt: DateTime!
+  zip: String
 }
 
 type Review implements Node {
@@ -36,6 +41,7 @@ type Review implements Node {
   id: ID! @isUnique
   ratingLevel: RatingLevel!
   skidMark: SkidMark! @relation(name: "SkidMarkReviews")
+  text: String
   updatedAt: DateTime!
   user: User! @relation(name: "UserReviews")
 }
@@ -43,6 +49,7 @@ type Review implements Node {
 type SkidMark implements Node {
   createdAt: DateTime!
   createdByUser: User! @relation(name: "UserSkidMarks")
+  description: String
   files: [File!]! @relation(name: "SkidMarkFiles")
   id: ID! @isUnique
   location: Location @relation(name: "SkidMarkLocation")
